@@ -50,3 +50,4 @@ void frog::ded() {
 	xpos = 500;
 	ypos = 954;
 }
+
