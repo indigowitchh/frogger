@@ -16,6 +16,7 @@ int main()
 
 
 	frog Phrog;
+	Car carr;
 
 	//SFML Boilerplate
 	sf::RenderWindow screen(sf::VideoMode(1000, 1000), "Frogger!");
@@ -32,6 +33,53 @@ int main()
 			}
 			else keys[UP] = false;
 		
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+				keys[DOWN] = true;
+			}
+			else keys[DOWN] = false;
+
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+				keys[LEFT] = true;
+			}
+			else keys[LEFT ] = false;
+
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+				keys[RIGHT] = true;
+			}
+			else keys[RIGHT] = false;
+
+		}
+		
+		//physics section------------------------------------------------
+		timer++;
+		if (timer > 500) {
+			Phrog.jump(keys);
+			timer = 0;
+			
+		}
+		carr.move();
+		if (carr.collide(Phrog.xpos, Phrog.ypos) == true) {
+			Phrog.ded();
+		}
+		if (Phrog.lives <= 0) {
+			screen.close();
+		}
+		//render section-------------------------------------------------
+		screen.clear();
+
+		Phrog.draw(screen);
+		carr.draw(screen);
+
+		screen.display();
+
+	} //end of game loop-------------------------------------------------
+	cout<< "game over..." << endl;
+	return 0;
+}
+
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 				keys[DOWN] = true;
